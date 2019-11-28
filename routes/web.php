@@ -16,16 +16,16 @@ Route::get('/', function () {
 });
 
 Route::middleware(['ipcheck'])->group(function() {
-	Route::get('/about', function () {
-	    return view('about');
-	});
-
-
 	Route::get('/contact', function () {
 	    return view('contact');
 	});
 
 });
+
+Route::get('/about', function () {
+	    return view('about');
+	})->middleware('checkuser');
+
 /*
 below the way we could add route for individual
 */
