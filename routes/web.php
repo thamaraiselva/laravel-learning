@@ -24,7 +24,7 @@ Route::middleware(['ipcheck'])->group(function() {
 
 Route::get('/about', function () {
 	    return view('about');
-	})->middleware('checkuser');
+	})->middleware('checkuser:test@mail.com');
 
 /*
 below the way we could add route for individual

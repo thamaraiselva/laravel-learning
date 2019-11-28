@@ -13,9 +13,9 @@ class Checkuser
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $email)
     {
-        if($request->user()->email=='test@mail.com') {
+        if($request->user()->email==$email) {
             return $next($request);            
         }
 
