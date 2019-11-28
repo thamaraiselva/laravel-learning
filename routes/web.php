@@ -15,9 +15,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/about', function () {
-    return view('about');
-})->middleware('ipcheck');
+Route::middleware(['ipcheck'])->group(function() {
+	Route::get('/about', function () {
+	    return view('about');
+	});
+
+
+	Route::get('/contact', function () {
+	    return view('contact');
+	});
+
+});
+/*
+below the way we could add route for individual
+*/
+// Route::get('/contact', function () {
+//     return view('contact');
+// })->middleware('ipcheck');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
