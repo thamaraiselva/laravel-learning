@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -37,3 +38,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('profile', 'ProfileController');
+
+
+
+Route::get('/profile_route', function () {
+	    return view('profile.create');
+	});

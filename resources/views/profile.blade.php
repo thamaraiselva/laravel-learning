@@ -3,7 +3,7 @@
 @section('main')
 <div class="row">
  <div class="col-sm-8 offset-sm-2">
-    <h1 class="display-3">Add a contact</h1>
+    <h1 class="display-3">Profile</h1>
   <div>
     @if ($errors->any())
       <div class="alert alert-danger">
@@ -14,7 +14,7 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('contacts.store') }}">
+      <form method="post" action="{{ route('profile.store') }}">
           @csrf
           <div class="form-group">    
               <label for="first_name">First Name:</label>
@@ -25,7 +25,14 @@
               <label for="last_name">Last Name:</label>
               <input type="text" class="form-control" name="last_name"/>
           </div>
-
+           <div class="form-group">
+            <label for="Gender">Gender</label>
+            <select class="form-control" name="Gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div> 
           <div class="form-group">
               <label for="city">City:</label>
               <input type="text" class="form-control" name="city"/>
@@ -37,8 +44,9 @@
           <div class="form-group">
               <label for="job_title">Job Title:</label>
               <input type="text" class="form-control" name="job_title"/>
-          </div>                         
-          <button type="submit" class="btn btn-primary-outline">Add contact</button>
+          </div>                  
+          <input type="hidden" class="form-control" value="{{ Auth::user()->id }}" name="user_id"/>       
+          <button type="submit" class="btn btn-primary">Submit</button>
       </form>
   </div>
 </div>
