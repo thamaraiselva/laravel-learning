@@ -44,6 +44,6 @@ Route::get('profile/{user}', function (User $user) {
 });
 
 
-Route::get('/profile_route', function () {
-	    return view('profile.create');
+Route::get('/profiles', function () {
+	    return view('profiles');
 	});

@@ -41,6 +41,10 @@
               <label for="city">City:</label>
               <input type="text" class="form-control" name="city" value="{{isset($profile_data->city) ? $profile_data->city :' '}}"/>
           </div>
+          <!-- <div class="form-group">
+              <label for="city">City:</label>
+              <input type="file" class="form-control" name="city"/>
+          </div> -->
           <div class="form-group">
               <label for="country">Country:</label>
               <input type="text" class="form-control" name="country" value="{{isset($profile_data->country) ? $profile_data->country :' '}}"/>
