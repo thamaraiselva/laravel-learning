@@ -14,36 +14,40 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('profile.store') }}">
+    
+          <form method="post" action="{{isset($profile_data->id) ? route('profile.update',$profile_data->id) :route('profile.store')}}">
+          @if(isset($profile_data->id))
+            @method('PATCH')
+          @endif
           @csrf
           <div class="form-group">    
               <label for="first_name">First Name:</label>
-              <input type="text" class="form-control" name="first_name"/>
+              <input type="text" class="form-control" name="first_name" value="{{isset($profile_data->first_name) ? $profile_data->first_name :' '}}"/>
           </div>
 
           <div class="form-group">
               <label for="last_name">Last Name:</label>
-              <input type="text" class="form-control" name="last_name"/>
+              <input type="text" class="form-control" name="last_name" value="{{isset($profile_data->last_name) ? $profile_data->last_name :' '}}"/>
           </div>
            <div class="form-group">
             <label for="Gender">Gender</label>
             <select class="form-control" name="Gender">
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
+              <option {{(isset($profile_data->Gender) && $profile_data->Gender=='male') ? 'selected':' '}} value="male">Male</option>
+              <option value="female" {{(isset($profile_data->Gender) && $profile_data->Gender=='female') ? 'selected':' '}} >Female</option>
+              <option value="other" {{(isset($profile_data->Gender) && $profile_data->Gender=='other') ? 'selected':' '}} >Other</option>
             </select>
           </div> 
           <div class="form-group">
               <label for="city">City:</label>
-              <input type="text" class="form-control" name="city"/>
+              <input type="text" class="form-control" name="city" value="{{isset($profile_data->city) ? $profile_data->city :' '}}"/>
           </div>
           <div class="form-group">
               <label for="country">Country:</label>
-              <input type="text" class="form-control" name="country"/>
+              <input type="text" class="form-control" name="country" value="{{isset($profile_data->country) ? $profile_data->country :' '}}"/>
           </div>
           <div class="form-group">
               <label for="job_title">Job Title:</label>
-              <input type="text" class="form-control" name="job_title"/>
+              <input type="text" class="form-control" name="job_title" value="{{isset($profile_data->job_title) ? $profile_data->job_title :' '}}"/>
           </div>                      
           <button type="submit" class="btn btn-primary">Submit</button>
       </form>

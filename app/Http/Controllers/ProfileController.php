@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Auth;
 
 use App\Profile;
+
+use App\User;
+
+use Auth;
 
 class ProfileController extends Controller
 {
@@ -15,9 +19,27 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+    {
+        // $user=Auth::user();
+        
+    }
+
+    
     public function index()
     {
-        return view('profile');
+        $this->user_id =   Auth::user()->id;
+        $user =User::find($this->user_id);
+        $profile=$user->profile;
+        if(is_null($profile)){
+            return view('profile');
+        }
+        else {
+            // dump('else');
+            // return view('profile')->with(compact('profile'));
+            return view('profile',['profile_data'=>$profile]);
+        }
         
     }
 
@@ -89,7 +111,21 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'first_name'=>'required',
+            'last_name'=>'required'
+        ]);
+
+        $profile = Profile::find($id);
+        $profile->first_name = $request->get('first_name');
+        $profile->last_name = $request->get('last_name');
+        $profile->user_id = Auth::user()->id;
+        $profile->Gender = $request->get('Gender');
+        $profile->job_title = $request->get('job_title');
+        $profile->city = $request->get('city');
+        $profile->country = $request->get('country');
+        $profile->save();
+        return redirect('/profile')->with('success', 'Profile saved!');
     }
 
     /**

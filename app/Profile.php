@@ -15,5 +15,10 @@ class Profile extends Model
     		'job_title',
     		'city',
     		'country'
-    ];
+	];
+	
+	public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
