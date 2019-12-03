@@ -44,8 +44,7 @@
           <div class="form-group">
               <label for="job_title">Job Title:</label>
               <input type="text" class="form-control" name="job_title"/>
-          </div>                  
-          <input type="hidden" class="form-control" value="{{ Auth::user()->id }}" name="user_id"/>       
+          </div>                      
           <button type="submit" class="btn btn-primary">Submit</button>
       </form>
   </div>

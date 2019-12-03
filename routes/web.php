@@ -39,6 +39,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('profile', 'ProfileController');
 
+Route::get('profile/{user}', function (User $user) {
+    return $user->email;
+});
 
 
 Route::get('/profile_route', function () {

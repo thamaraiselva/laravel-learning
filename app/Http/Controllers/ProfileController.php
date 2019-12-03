@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Profile;
 
 class ProfileController extends Controller
@@ -45,7 +47,7 @@ class ProfileController extends Controller
         $profile = new Profile([
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
-            'user_id' => $request->get('user_id'),
+            'user_id' => Auth::user()->id,
             'Gender' => $request->get('Gender'),
             'job_title' => $request->get('job_title'),
             'city' => $request->get('city'),
