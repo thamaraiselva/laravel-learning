@@ -48,10 +48,36 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                        @else            
+                            <div class="dropdown">
+                                <li class="dropbtn" > 
+                                @php($profile_image=isset(Auth::user()->profile->profile_image) ? Auth::user()->profile->profile_image :'default.png')
+                                <a href ="/profile"> <img id="profile" 
+                                     src="{{ Storage::url('profile-images/'.$profile_image) }}"
+                                     style="width: 40px; height: 40px; border-radius: 20px;" ></img>{{ Auth::user()->name }}
+                                 </a>
+                                    <img id="dd" src="{{ Storage::url('icons/chevron-down.svg') }}"></img>
+                                </li>
+                                <div class="dropdown-content" id="myDropdown" style="display:none">
+                                    <!-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"> -->
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                        <a class="dropdown-item" href="/profiles">
+                                            {{ __('profiles') }}
+                                        </a>
+                                    <!-- </div> -->
+                                </div>
+                            </div> 
+                            <!-- <li class="nav-item dropdown">
+                             {{ Auth::user()->name }} <a id="navbarDropdown" class="nav-link dropdown-toggle" href="/profile" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -68,7 +94,7 @@
                                         {{ __('profiles') }}
                                     </a>
                                 </div>
-                            </li>
+                            </li> -->
                            
                         @endguest
                     </ul>
@@ -92,3 +118,10 @@
               crossorigin="anonymous"></script>
         
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/js/bootstrap.min.js" integrity="sha384-3qaqj0lc6sV/qpzrc1N5DC6i1VRn/HyX4qdPaiEFbn54VjQBEU341pvjz7Dv3n6P" crossorigin="anonymous"></script>
+<script>
+$("#dd").click(
+function() {
+        $("#myDropdown").show();
+        console.log("dd");
+        });
+</script>

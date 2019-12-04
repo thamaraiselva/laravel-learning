@@ -15,7 +15,7 @@
       </div><br />
     @endif
     
-          <form method="post" action="{{isset($profile_data->id) ? route('profile.update',$profile_data->id) :route('profile.store')}}">
+          <form method="post" enctype="multipart/form-data" action="{{isset($profile_data->id) ? route('profile.update',$profile_data->id) :route('profile.store')}}">
           @if(isset($profile_data->id))
             @method('PATCH')
           @endif
@@ -41,10 +41,10 @@
               <label for="city">City:</label>
               <input type="text" class="form-control" name="city" value="{{isset($profile_data->city) ? $profile_data->city :' '}}"/>
           </div>
-          <!-- <div class="form-group">
-              <label for="city">City:</label>
-              <input type="file" class="form-control" name="city"/>
-          </div> -->
+          <div class="form-group">
+              <label for="profile Image">Profile Image:</label>
+              <input type="file" class="form-control" name="profile_image"/>
+          </div>
           <div class="form-group">
               <label for="country">Country:</label>
               <input type="text" class="form-control" name="country" value="{{isset($profile_data->country) ? $profile_data->country :' '}}"/>

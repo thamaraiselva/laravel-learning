@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Str;
+
 // use Illuminate\Support\Facades\Auth;
 
 use App\Profile;
@@ -20,11 +22,11 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function __construct()
+    public function __construct()
     {
-        // $user=Auth::user();
-        
+        $this->middleware(['auth']);
     }
+
 
     
     public function index()
@@ -63,9 +65,9 @@ class ProfileController extends Controller
     {
         $request->validate([
             'first_name'=>'required',
-            'last_name'=>'required'
+            'last_name'=>'required',
+            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
         $profile = new Profile([
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
@@ -75,6 +77,14 @@ class ProfileController extends Controller
             'city' => $request->get('city'),
             'country' => $request->get('country')
         ]);
+        if ($request->hasFile('profile_image')) {
+            $image = $request->file('profile_image');
+            $name = str_slug(Auth::user()->name.Auth::user()->id).'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/storage/profile-images');
+            $imagePath = $destinationPath. "/".  $name;
+            $image->move($destinationPath, $name);
+            $profile->profile_image = $name;
+          }
         $profile->save();
         return redirect('/profile')->with('success', 'Profile saved!');
     }
@@ -113,7 +123,8 @@ class ProfileController extends Controller
     {
         $request->validate([
             'first_name'=>'required',
-            'last_name'=>'required'
+            'last_name'=>'required',
+            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $profile = Profile::find($id);
@@ -124,6 +135,14 @@ class ProfileController extends Controller
         $profile->job_title = $request->get('job_title');
         $profile->city = $request->get('city');
         $profile->country = $request->get('country');
+        if ($request->hasFile('profile_image')) {
+            $image = $request->file('profile_image');
+            $name = str_slug(Auth::user()->name.Auth::user()->id).'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/storage/profile-images');
+            $imagePath = $destinationPath. "/".  $name;
+            $image->move($destinationPath, $name);
+            $profile->profile_image = $name;
+          }
         $profile->save();
         return redirect('/profile')->with('success', 'Profile saved!');
     }
