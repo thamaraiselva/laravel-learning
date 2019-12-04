@@ -44,6 +44,4 @@ Route::get('profile/{user}', function (User $user) {
 });
 
 
-Route::get('/profiles', function () {
-	    return view('profiles');
-	});
+Route::get('/profiles','ProfileController@all_profiles');

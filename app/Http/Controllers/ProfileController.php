@@ -157,4 +157,10 @@ class ProfileController extends Controller
     {
         //
     }
+
+    public function all_profiles()
+    {
+        $profiles = Profile::all();
+        return view('profiles',compact('profiles'));
+    }
 }
