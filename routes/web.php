@@ -45,3 +45,5 @@ Route::get('profile/{user}', function (User $user) {
 
 
 Route::get('/profiles','ProfileController@all_profiles');
+
+Route::any('view/{slug}', 'ProfileController@view'); 

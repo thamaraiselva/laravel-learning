@@ -51,7 +51,11 @@
                         @else            
                             <div class="dropdown">
                                 <li class="dropbtn" > 
-                                @php($profile_image=isset(Auth::user()->profile->profile_image) ? Auth::user()->profile->profile_image :'default.png')
+                                @php
+                                    $profile_image='default.png';
+                                    if(isset(Auth::user()->profile->profile_image))
+                                      $profile_image=Auth::user()->profile->profile_image!='' ? Auth::user()->profile->profile_image :'default.png'
+                                @endphp
                                 <a href ="/profile"> <img id="profile" 
                                      src="{{ Storage::url('profile-images/'.$profile_image) }}"
                                      style="width: 40px; height: 40px; border-radius: 20px;" ></img>{{ Auth::user()->name }}

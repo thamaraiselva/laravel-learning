@@ -84,6 +84,7 @@ class ProfileController extends Controller
             $imagePath = $destinationPath. "/".  $name;
             $image->move($destinationPath, $name);
             $profile->profile_image = $name;
+            $profile->profile_url= str_slug(Auth::user()->name.Auth::user()->id);
           }
         $profile->save();
         return redirect('/profile')->with('success', 'Profile saved!');
@@ -143,6 +144,7 @@ class ProfileController extends Controller
             $image->move($destinationPath, $name);
             $profile->profile_image = $name;
           }
+        $profile->profile_url= str_slug(Auth::user()->name.Auth::user()->id);
         $profile->save();
         return redirect('/profile')->with('success', 'Profile saved!');
     }
@@ -162,5 +164,13 @@ class ProfileController extends Controller
     {
         $profiles = Profile::all();
         return view('profiles',compact('profiles'));
+    }
+
+    public function view(Request $request,$slug)
+    {
+        $profile = Profile::where('profile_url', $slug)->first();
+        if(isset($profile))
+            return view('profileView', ['profile' => $profile]);
+        return "user not found!";
     }
 }
