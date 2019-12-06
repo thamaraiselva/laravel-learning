@@ -8,6 +8,10 @@ use Illuminate\Support\Str;
 
 // use Illuminate\Support\Facades\Auth;
 
+use App\Mail\ProfileViewed;
+
+use Illuminate\Support\Facades\Mail;
+
 use App\Profile;
 
 use App\User;
@@ -169,8 +173,11 @@ class ProfileController extends Controller
     public function view(Request $request,$slug)
     {
         $profile = Profile::where('profile_url', $slug)->first();
-        if(isset($profile))
+        $viewed_mail_id= User::find($profile->user_id);
+        if(isset($profile)){
+            Mail::to($viewed_mail_id->email)->send(new ProfileViewed($viewed_mail_id,Auth::user()));
             return view('profileView', ['profile' => $profile]);
+        }
         return "user not found!";
     }
 }
