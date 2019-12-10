@@ -18,6 +18,9 @@ use App\User;
 
 use Auth;
 
+use Illuminate\Support\Facades\DB;
+
+
 class ProfileController extends Controller
 {
     /**
@@ -166,7 +169,9 @@ class ProfileController extends Controller
 
     public function all_profiles()
     {
-        $profiles = Profile::all();
+        // $profiles = Profile::all();
+        $profiles = Profile::paginate(10);
+        // $profiles = DB::table('profiles')->paginate(2);
         return view('profiles',compact('profiles'));
     }
 

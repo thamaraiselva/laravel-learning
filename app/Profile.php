@@ -14,7 +14,9 @@ class Profile extends Model
     		'Gender',
     		'job_title',
     		'city',
-    		'country'
+			'country',
+			'profile_image',
+			'profile_url'
 	];
 	
 	public function user()

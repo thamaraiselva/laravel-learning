@@ -90,6 +90,7 @@ background-color:#0e76a8;
             @endforeach
         </tbody>
     </table>
+    {{$profiles->links()}}
     <div>
     </div>
 @endsection
