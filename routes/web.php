@@ -53,3 +53,7 @@ Route::any('view/{slug}', 'ProfileController@view');
 */
 
 Route::post('/add_board','BoardsController@store');
+
+Route::any('board/{slug}/{slug1}', function (){
+	return view('board');
+}); 

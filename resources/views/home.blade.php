@@ -15,7 +15,7 @@
 
     <div class="boards">
     @foreach ($boards as $board)
-      <a class="card"  href="{{ $board->url }}">
+      <a class="card"  href="{{ 'board/'.$board->url }}">
         <div >
           <div class="card-body">
             {{$board->name}}
