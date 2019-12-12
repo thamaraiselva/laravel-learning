@@ -23,4 +23,13 @@ class BoardList extends Model
     {
         return $this->hasMany('App\Task');
     }
+
+    /* 
+    Get all the history lists for boardlist
+    */
+
+    public function historyList()
+    {
+        return $this->morphMany('App\HistoryList','history_list');
+    }
 }

@@ -15,5 +15,14 @@ class CheckList extends Model
     {
         return $this->belongsTo('App\Task');
     }
+
+     /* 
+    Get all the history lists for checklist
+    */
+
+    public function historyList()
+    {
+        return $this->morphMany('App\HistoryList','history_list');
+    }
     
 }

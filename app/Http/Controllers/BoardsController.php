@@ -54,8 +54,8 @@ class BoardsController extends Controller
             $board->save ();
             $history = new HistoryList();
             $history->user_id=Auth::user()->id;
-            $history->history_data_id=$board->id;
-            $history->for='board';
+            $history->history_list_id=$board->id;
+            $history->history_list_type='App\Board';
             $history->type='add';
             $history->save ();
             return response ()->json ( $board );
