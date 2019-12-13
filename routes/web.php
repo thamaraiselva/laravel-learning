@@ -54,6 +54,7 @@ Route::any('view/{slug}', 'ProfileController@view');
 
 Route::post('/add_board','BoardsController@store');
 
-Route::any('board/{slug}/{slug1}', function (){
+Route::any('board/{slug}', function ($slug){
 	return view('board');
-}); 
+})->where('slug', '.*'); 
+
